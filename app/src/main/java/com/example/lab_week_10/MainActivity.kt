@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         prepareViewModel()
     }
 
@@ -24,16 +25,14 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.text_total, total)
     }
 
-    private fun prepareViewModel() {
-        // FIXED
-//        viewModel.total.observe(this, Observer { total ->
-//            updateText(total)
-//        })
-        updateText(viewModel.total)
+    private fun prepareViewModel(){
+
+        viewModel.total.observe(this) { total ->
+            updateText(total)
+        }
 
         findViewById<Button>(R.id.button_increment).setOnClickListener {
             viewModel.incrementTotal()
-            updateText(viewModel.total)
         }
     }
 }
